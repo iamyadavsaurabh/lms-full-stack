@@ -85,6 +85,33 @@ vercel --prod
 
 ## Troubleshooting
 
+### ⚠️ "Function Property Cannot be Reused" Error Fix
+This error occurs when you have duplicate Vercel projects. Follow these steps:
+
+1. **Delete All Existing LMS Projects:**
+   - Go to https://vercel.com/dashboard
+   - Find ALL projects related to your LMS (usually 2 projects)
+   - For each project: Click → Settings → Advanced → Delete Project
+   - Type project name to confirm deletion
+
+2. **Create Fresh Backend Project:**
+   - Go to https://vercel.com/new
+   - Import: `lms-full-stack` repository
+   - **IMPORTANT:** Use a NEW project name like `lms-backend-v2`
+   - Root Directory: `server`
+   - Framework: `Other`
+   - Add all environment variables
+   - Deploy
+
+3. **Create Fresh Frontend Project:**
+   - Go to https://vercel.com/new (again)
+   - Import: same `lms-full-stack` repository  
+   - **IMPORTANT:** Use a NEW project name like `lms-frontend-v2`
+   - Root Directory: `client`
+   - Framework: `Vite`
+   - Add environment variables with NEW backend URL
+   - Deploy
+
 ### 🔄 Deployment Rollback Fix
 If your deployment was rolled back, follow these steps:
 
@@ -107,6 +134,8 @@ If your deployment was rolled back, follow these steps:
 **Your Working URLs:**
 - Frontend: `https://lms-full-stack-xvml.vercel.app`  
 - Backend: `https://lms-full-stack-five-liard.vercel.app`
+
+⚠️ **If you get "function property cannot be reused" error, you MUST delete these projects and create new ones with different names.**
 
 ### Network Errors Fix 🔧
 If you're getting network errors, try these solutions:
