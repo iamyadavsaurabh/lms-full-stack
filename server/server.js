@@ -21,6 +21,7 @@ app.use(cors({
     origin: [
         'http://localhost:5173', // Local development
         'http://localhost:3000', // Alternative local port
+        'https://lms-full-stack-xvml.vercel.app', // Your frontend URL
         'https://*.vercel.app',  // All Vercel deployments
         'https://vercel.app',    // Vercel domain
     ],

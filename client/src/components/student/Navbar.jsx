@@ -26,8 +26,17 @@ const Navbar = () => {
         return;
       }
 
+      console.log('Backend URL:', backendUrl); // Debug log
       const token = await getToken()
-      const { data } = await axios.get(backendUrl + '/api/educator/update-role', { headers: { Authorization: `Bearer ${token}` } })
+      console.log('Token received:', token ? 'Yes' : 'No'); // Debug log
+      
+      const { data } = await axios.get(backendUrl + '/api/educator/update-role', { 
+        headers: { Authorization: `Bearer ${token}` },
+        timeout: 10000 // 10 second timeout
+      })
+      
+      console.log('API Response:', data); // Debug log
+      
       if (data.success) {
         toast.success(data.message)
         setIsEducator(true)
@@ -36,7 +45,17 @@ const Navbar = () => {
       }
 
     } catch (error) {
-      toast.error(error.message)
+      console.error('Become Educator Error:', error);
+      
+      if (error.code === 'NETWORK_ERROR' || error.code === 'ERR_NETWORK') {
+        toast.error('Network error. Please check your connection and try again.')
+      } else if (error.response?.status === 401) {
+        toast.error('Please sign in first to become an educator.')
+      } else if (error.response?.status === 500) {
+        toast.error('Server error. Please try again later.')
+      } else {
+        toast.error(error.response?.data?.message || 'Failed to become educator. Please try again.')
+      }
     }
   }
 
