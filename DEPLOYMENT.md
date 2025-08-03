@@ -14,8 +14,9 @@
    ```
    VITE_CLERK_PUBLISHABLE_KEY=pk_test_YXNzdXJlZC1jYWxmLTk4LmNsZXJrLmFjY291bnRzLmRldiQ
    VITE_CURRENCY=$
-   VITE_BACKEND_URL=https://your-backend-url.vercel.app
+   VITE_BACKEND_URL=https://lms-full-stack-five-liard.vercel.app
    ```
+   ⚠️ **Important:** Use your actual backend URL from step 1
 7. Deploy
 
 #### Backend (Server)
@@ -83,6 +84,29 @@ vercel --prod
    - Update Stripe webhook URL to your backend URL
 
 ## Troubleshooting
+
+### 🔄 Deployment Rollback Fix
+If your deployment was rolled back, follow these steps:
+
+1. **Check Deployment Logs:**
+   - Go to your Vercel project dashboard
+   - Click on "Functions" or "Deployments" tab
+   - Look for error messages in the failed deployment
+
+2. **Common Rollback Causes:**
+   - Missing environment variables
+   - Build errors
+   - Runtime errors during deployment
+   - CORS configuration issues
+
+3. **Quick Fix:**
+   - Ensure all environment variables are set correctly
+   - Redeploy by pushing a new commit or manually triggering deployment
+   - Use the specific URLs below:
+
+**Your Working URLs:**
+- Frontend: `https://lms-full-stack-xvml.vercel.app`  
+- Backend: `https://lms-full-stack-five-liard.vercel.app`
 
 ### Network Errors Fix 🔧
 If you're getting network errors, try these solutions:
