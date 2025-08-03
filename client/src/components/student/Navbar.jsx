@@ -36,6 +36,17 @@ const Navbar = () => {
         return;
       }
 
+      // Test backend connectivity first
+      console.log('Testing backend connectivity...');
+      try {
+        const testResponse = await axios.get(backendUrl);
+        console.log('Backend test response:', testResponse.data);
+      } catch (testError) {
+        console.error('Backend connectivity test failed:', testError);
+        toast.error('Cannot connect to backend server. Please try again later.');
+        return;
+      }
+
       const token = await getToken()
       console.log('Token received:', token ? 'Yes' : 'No'); // Debug log
       console.log('Full API URL:', backendUrl + '/api/educator/update-role'); // Debug log
@@ -62,6 +73,8 @@ const Navbar = () => {
         toast.error('Network error. Please check your connection and try again.')
       } else if (error.response?.status === 401) {
         toast.error('Please sign in first to become an educator.')
+      } else if (error.response?.status === 404) {
+        toast.error('Educator endpoint not found. Please check if backend is properly deployed.')
       } else if (error.response?.status === 500) {
         toast.error('Server error. Please try again later.')
       } else {
