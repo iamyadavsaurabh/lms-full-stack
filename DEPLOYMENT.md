@@ -84,6 +84,23 @@ vercel --prod
 
 ## Troubleshooting
 
+### Network Errors Fix 🔧
+If you're getting network errors, try these solutions:
+
+1. **CORS Issues**: 
+   - Make sure your backend URL is correct in frontend env
+   - Backend is configured with proper CORS origins
+   - Both frontend and backend are deployed
+
+2. **Environment Variables**: 
+   - Double-check `VITE_BACKEND_URL` points to your deployed backend
+   - Example: `VITE_BACKEND_URL=https://your-backend-name.vercel.app`
+   - No trailing slash in the URL
+
+3. **Quick Test**: 
+   - Visit your backend URL directly (should show "API Working")
+   - Visit `your-backend-url/api/course/all` (should return JSON)
+
 ### Common Issues:
 1. **CORS Errors**: Ensure backend CORS is configured for your frontend domain
 2. **Environment Variables**: Double-check all environment variables are set correctly
