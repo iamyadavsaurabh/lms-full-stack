@@ -86,31 +86,30 @@ vercel --prod
 ## Troubleshooting
 
 ### ⚠️ "Function Property Cannot be Reused" Error Fix
-This error occurs when you have duplicate Vercel projects. Follow these steps:
+This error occurs when there are conflicts in Vercel configuration or duplicate projects:
 
-1. **Delete All Existing LMS Projects:**
-   - Go to https://vercel.com/dashboard
-   - Find ALL projects related to your LMS (usually 2 projects)
-   - For each project: Click → Settings → Advanced → Delete Project
-   - Type project name to confirm deletion
+**Error Message:** `The 'functions' property cannot be used in conjunction with the 'builds' property`
 
-2. **Create Fresh Backend Project:**
-   - Go to https://vercel.com/new
-   - Import: `lms-full-stack` repository
-   - **IMPORTANT:** Use a NEW project name like `lms-backend-v2`
+**Solution:**
+1. **Configuration is now fixed** - The latest code has the correct `vercel.json`
+2. **If you still get the error:**
+   - Delete existing Vercel projects
+   - Create new projects with different names
+   - The configuration conflict has been resolved
+
+**Steps to Deploy Fresh:**
+1. **Go to:** https://vercel.com/new
+2. **Import:** `lms-full-stack` repository  
+3. **Backend Project:**
+   - Project Name: `lms-backend-fixed`
    - Root Directory: `server`
    - Framework: `Other`
-   - Add all environment variables
-   - Deploy
-
-3. **Create Fresh Frontend Project:**
-   - Go to https://vercel.com/new (again)
-   - Import: same `lms-full-stack` repository  
-   - **IMPORTANT:** Use a NEW project name like `lms-frontend-v2`
+   - Add all backend environment variables
+4. **Frontend Project:**
+   - Project Name: `lms-frontend-fixed`  
    - Root Directory: `client`
    - Framework: `Vite`
-   - Add environment variables with NEW backend URL
-   - Deploy
+   - Add frontend environment variables
 
 ### 🔄 Deployment Rollback Fix
 If your deployment was rolled back, follow these steps:
