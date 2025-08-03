@@ -8,8 +8,13 @@ import { clerkClient } from '@clerk/express'
 export const updateRoleToEducator = async (req, res) => {
 
     try {
+        console.log('Update role to educator called for user:', req.auth?.userId); // Debug log
 
-        const userId = req.auth.userId
+        const userId = req.auth?.userId
+
+        if (!userId) {
+            return res.status(401).json({ success: false, message: 'Authentication required' })
+        }
 
         await clerkClient.users.updateUserMetadata(userId, {
             publicMetadata: {
@@ -17,10 +22,12 @@ export const updateRoleToEducator = async (req, res) => {
             },
         })
 
+        console.log('Successfully updated user role to educator:', userId); // Debug log
         res.json({ success: true, message: 'You can publish a course now' })
 
     } catch (error) {
-        res.json({ success: false, message: error.message })
+        console.error('Error updating role to educator:', error); // Debug log
+        res.status(500).json({ success: false, message: error.message || 'Failed to update role' })
     }
 
 }

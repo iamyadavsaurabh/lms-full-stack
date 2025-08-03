@@ -18,17 +18,27 @@ const Navbar = () => {
   const { user } = useUser()
 
   const becomeEducator = async () => {
+    console.log('🔥 Become Educator button clicked!'); // Initial debug log
 
     try {
 
       if (isEducator) {
+        console.log('User is already educator, navigating to dashboard');
         navigate('/educator')
         return;
       }
 
       console.log('Backend URL:', backendUrl); // Debug log
+      console.log('User object:', user); // Debug log
+      
+      if (!user) {
+        toast.error('Please sign in first to become an educator.');
+        return;
+      }
+
       const token = await getToken()
       console.log('Token received:', token ? 'Yes' : 'No'); // Debug log
+      console.log('Full API URL:', backendUrl + '/api/educator/update-role'); // Debug log
       
       const { data } = await axios.get(backendUrl + '/api/educator/update-role', { 
         headers: { Authorization: `Bearer ${token}` },
@@ -46,6 +56,7 @@ const Navbar = () => {
 
     } catch (error) {
       console.error('Become Educator Error:', error);
+      console.error('Error details:', error.response?.data);
       
       if (error.code === 'NETWORK_ERROR' || error.code === 'ERR_NETWORK') {
         toast.error('Network error. Please check your connection and try again.')
